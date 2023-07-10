@@ -129,9 +129,12 @@ public class GuestRoomController extends AManagerRoomController {
                                     public void actionPerformed(ActionEvent e) {
                                         // luu lai tong tien thanh toan
                                         // luu phong ma khach hang thanh toan
-                                        int idPay = guestRoomService.insertPay(infoCusBookedFormView.idCus(), infoCusBookedFormView.idRoom(), formBill.getDateCreateBill(), formBill.getTotalPrice());
+
                                         int idBooked = guestRoomService.getIdBooked(infoCusBookedFormView.idCus(), infoCusBookedFormView.idRoom());
+//                                        int idPay = guestRoomService.insertPay(infoCusBookedFormView.idCus(), infoCusBookedFormView.idRoom(),formBill.getTotalPrice());
+                                        int idPay = guestRoomService.insertPay(infoCusBookedFormView.idCus(), idBooked,formBill.getTotalPrice());
                                         guestRoomService.insertCusPay(idBooked, idPay);
+
                                         guestRoomService.updatePayStateBookedRoom(idBooked);
                                         guestRoomService.updateServicePayed(idBooked);
 

@@ -258,6 +258,7 @@ public class GuestRoomService extends ARoomService {
                 pstmt.setTimestamp(3,new Timestamp(System.currentTimeMillis()));
 
                 pstmt.executeUpdate();
+                System.err.println("OKK");
             ResultSet rs = pstmt.getGeneratedKeys();
             if (rs.next()) {
                 int generatedId = rs.getInt(1);
@@ -270,15 +271,16 @@ public class GuestRoomService extends ARoomService {
         return -1;
     }
 
-    public int insertPay(int idCus, int idNumber,Date date,String totalPrice) {
+    public int insertPay(int idCus, int idNumber,String totalPrice) {
         String sql = "INSERT INTO payment(customer_id,book_a_room_id,payment_date,total_amount)"
                 + "VALUES(?, ?, ?, ?)";
         try(PreparedStatement pstmt  = databaseService.getPreparedStatement(sql,Statement.RETURN_GENERATED_KEYS)) {
             pstmt.setInt(1, idCus);
             pstmt.setInt(2, idNumber);
-            pstmt.setDate(3,date);
+            pstmt.setTimestamp(3,new Timestamp(System.currentTimeMillis()));
             pstmt.setBigDecimal(4,new BigDecimal(Long.valueOf(totalPrice)));
             pstmt.executeUpdate();
+            System.err.println("OKK");
             ResultSet rs = pstmt.getGeneratedKeys();
             if (rs.next()) {
                 int generatedId = rs.getInt(1);
@@ -324,7 +326,8 @@ public class GuestRoomService extends ARoomService {
     }
     public static void main(String[] args) {
         GuestRoomService g = new GuestRoomService();
-g.getInforGuestRooms();
+        g.insertPay(152, 163,"5000");
+        g.insertCusPay(163,45);
     }
 
 }

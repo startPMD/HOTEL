@@ -6,6 +6,8 @@ import model.ServiceRoomModel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.text.DecimalFormat;
@@ -386,7 +388,16 @@ public class FormBill extends JFrame {
         setSize(625,getHeight()+panelServices.getLocation().y-150);
     }
     public static void main(String[] args) {
-        new FormBill().setVisible(true);
+
+
+        FormBill d = new FormBill();
+                d.setVisible(true);
+                d.getBtnCheckOut().addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        System.out.println(d.getDateCreateBill());
+                    }
+                });
     }
 
 

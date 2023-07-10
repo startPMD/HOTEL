@@ -154,6 +154,7 @@ public class PanelManagerPayment extends JPanel {
     }
 
     public void setDataBillInDate(List<Object[]> objects) {
+        selectBillInDate.setRowCount(0);
         for (Object[] billCus : objects) {
             selectBillInDate.addRow(new Object[]{
                     billCus[0], billCus[1], billCus[2], billCus[3], billCus[4], billCus[5], billCus[6],

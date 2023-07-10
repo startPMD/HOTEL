@@ -19,11 +19,11 @@ public class ManagerPaymentService {
 
     public List<Object[]> getBillCurrent() {
         List<Object[]> objects = new ArrayList<>();
-        String sql = "SELECT @row := @row + 1  AS row_number, c.`name`,c.phone, p.payment_date, p.total_amount, p.payment_method,p.id " +
-                "FROM payment p " +
-                "JOIN customer c ON c.id = p.customer_id " +
-                "JOIN (SELECT @row := 0) r " +
-                "WHERE payment_date = CURDATE()";
+        String sql = "SELECT @row := @row + 1  AS row_number, c.`name`,c.phone, p.payment_date, p.total_amount, p.payment_method,p.id \n" +
+                "                FROM payment p \n" +
+                "                JOIN customer c ON c.id = p.customer_id \n" +
+                "                JOIN (SELECT @row := 0) r \n" +
+                "                WHERE DATE(payment_date) = CURRENT_DATE()";
         try (ResultSet rs = databaseService.executeQuery(sql)) {
             while (rs.next()) {
                 int stt = rs.getInt("row_number");
@@ -99,7 +99,7 @@ public class ManagerPaymentService {
 //        ) {
 //            System.out.println(2+" "+Arrays.toString(d));
 //        }
-        for (Object[] d:a.getBillCusFind("")
+        for (Object[] d:a.getBillCurrent()
              ) {
             System.out.println(3+" "+Arrays.toString(d));
         }
