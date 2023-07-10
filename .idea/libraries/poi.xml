@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="poi">
+    <CLASSES>
+      <root url="file://C:/Users/IntelliJ2022/poi" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+    <jarDirectory url="file://C:/Users/IntelliJ2022/poi" recursive="false" />
+  </library>
+</component>
