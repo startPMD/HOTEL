@@ -67,12 +67,12 @@ public class ManagerPaymentService {
     }
     public List<Object[]> getBillServices(int idBill) {
         List<Object[]> objects = new ArrayList<>();
-        String sql = "SELECT @row := @row + 1 AS row_number,p.id,s.`name`, brs.request_date, brs.quantity, brs.price " +
-                "FROM book_a_room_service brs " +
-                "JOIN payment p ON p.id = brs.book_a_room_id " +
-                "JOIN service s ON s.id = brs.service_id " +
-                "JOIN (SELECT @row := 0) r " +
-                "WHERE p.id = "+idBill;
+        String sql = "SELECT @row := @row + 1 AS row_number,p.id,s.`name`, brs.request_date, brs.quantity, brs.price \n" +
+                "                FROM book_a_room_service brs \n" +
+                "                JOIN payment p ON p.book_a_room_id = brs.book_a_room_id \n" +
+                "                JOIN service s ON s.id = brs.service_id \n" +
+                "                JOIN (SELECT @row := 0) r \n" +
+                "                WHERE p.id = "+idBill;
         try (ResultSet rs = databaseService.executeQuery(sql)) {
             while (rs.next()) {
                 int stt = rs.getInt("row_number");
@@ -99,7 +99,7 @@ public class ManagerPaymentService {
 //        ) {
 //            System.out.println(2+" "+Arrays.toString(d));
 //        }
-        for (Object[] d:a.getBillCurrent()
+        for (Object[] d:a.getBillServices(45)
              ) {
             System.out.println(3+" "+Arrays.toString(d));
         }

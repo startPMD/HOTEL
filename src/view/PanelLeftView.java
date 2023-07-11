@@ -2,7 +2,6 @@ package view;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.event.EventListenerList;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -132,14 +131,14 @@ public class PanelLeftView extends JPanel {
         this.add(panelMain, BorderLayout.NORTH);
     }
 
-    public void setNameE(String name) {
+    public void setName(String name) {
         nameE.setText(name);
         jlbNameE.setText(jlbNameE.getText() + nameE.getText());
 
     }
 
     public void setInfoEmployee(String name, String position) {
-        setNameE(name);
+        setName(name);
         setJobPosition(position);
     }
 

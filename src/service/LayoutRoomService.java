@@ -12,7 +12,6 @@ import java.util.*;
 
 public class LayoutRoomService extends ARoomService {
     private DatabaseService databaseService = null;
-    public static LayoutRoomService instanceLayoutRoomService = null;
     public LayoutRoomService() {
         databaseService = DatabaseService.getInstanceDatabaseService();
     }
@@ -22,11 +21,6 @@ public class LayoutRoomService extends ARoomService {
         return null;
     }
 
-    public static LayoutRoomService getInstanceLayoutRoomService(){
-        if(instanceLayoutRoomService == null)
-            instanceLayoutRoomService = new LayoutRoomService();
-        return instanceLayoutRoomService;
-    }
     public Map<String, List<LayoutRoomModel>> getInforRoomModels() {
         Map<String, List<LayoutRoomModel>> inforRooms = new TreeMap<>();
         String query = "SELECT r.location,r.room_number,rt.name,rt.num_guest,rt.price FROM room_types rt JOIN room r ON r.type_room_id = rt.id";
@@ -74,8 +68,6 @@ public class LayoutRoomService extends ARoomService {
             ex.printStackTrace();
         }
         return d;
-    }
-    public static void main(String[] args) {
     }
 
     // lay danh sach khach hang da từng đặc phong

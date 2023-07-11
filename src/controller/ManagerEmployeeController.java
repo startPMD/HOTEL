@@ -19,13 +19,24 @@ public class ManagerEmployeeController {
         this.panelManagerEmployee = panelManagerEmployee;
         this.managerEmployeeServicel = managerEmployeeServicel;
         loadDataEmployeeToTable();
+        eventManagerEmployee();
+    }
+
+    private void loadDataEmployeeToTable() {
+        for (AccountAndEmployeeModel ae : managerEmployeeServicel.getListEmployee()) {
+            panelManagerEmployee.setDataEmployeeTable(ae);
+        }
+    }
+    private void eventManagerEmployee(){
         this.panelManagerEmployee.addButtonListener(new ButtonListener() {
             @Override
             public void buttonPerformed(RoomEvent roomEvent) {
                 switch (roomEvent.getNameBtn()) {
                     case "editButton": {
-                        if (!panelManagerEmployee.selectedRowOne())
+                        if (!panelManagerEmployee.selectedRowOne()){
                             JOptionPane.showMessageDialog(null, "Để thực hiện chức năng này.Vui lòng chỉ chọn một hàng!");
+                            return;
+                        }
                         else {
                             EditForm editForm = panelManagerEmployee.getEditForm();
                             panelManagerEmployee.loadDataEmployeeToEditForm();
@@ -33,12 +44,17 @@ public class ManagerEmployeeController {
                             editForm.getSaveButton().addActionListener(new ActionListener() {
                                 @Override
                                 public void actionPerformed(ActionEvent e) {
-                                Map<String,String> values = editForm.valueChanges();
+                                    Map<String,String> values = editForm.valueChanges();
 
-                                  boolean updateSuccess =  managerEmployeeServicel.updateInfoEmployee(values);
-                                  editForm.messSaveSuccess(updateSuccess);
+                                    boolean updateSuccess =  managerEmployeeServicel.updateInfoEmployee(values);
+                                    if(updateSuccess){
+                                        panelManagerEmployee.delAllRow();
+                                        loadDataEmployeeToTable();
+                                        editForm.messSaveSuccess(updateSuccess);
+                                    }
                                 }
                             });
+
                         }
                         break;
                     }
@@ -62,9 +78,9 @@ public class ManagerEmployeeController {
                                     JOptionPane.showMessageDialog(null, "Thao tác thực hiện không thành công!");
                                     return;
                                 }
-                               else
-                                // vẽ lại view
-                                panelManagerEmployee.removeRowEmployee(e.getAccount().getNameAccount());
+                                else
+                                    // vẽ lại view
+                                    panelManagerEmployee.removeRowEmployee(e.getAccount().getNameAccount());
                             }
                             if(delSuccess)
                                 JOptionPane.showMessageDialog(null, "Thông tin nhân viên đã được xóa!");
@@ -73,12 +89,19 @@ public class ManagerEmployeeController {
                     }
                     case "saveEmployeeButton": {
                         AccountAndEmployeeModel employeeRegis = panelManagerEmployee.getUserForm().getInfoEmployeeRegis();
+                        String nameAccount = employeeRegis.getAccount().getNameAccount();
+                        // kích hoạt tài khoản
                         if(employeeRegis.getAccount().isActiveAccount() && employeeRegis.getEmployee().isActiveAccount()){
-                            managerEmployeeServicel.activeAccount(employeeRegis.getAccount().getNameAccount(),employeeRegis.getAccount().getPassAccount());
+                            managerEmployeeServicel.activeAccount(nameAccount,employeeRegis.getAccount().getPassAccount());
                             return;
                         }
                         if (employeeRegis == null) {
                             JOptionPane.showMessageDialog(null, "Vui lòng nhập đầy đủ thông tin !");
+                            return;
+                        }
+                        boolean nameAccountExit = managerEmployeeServicel.hasNameAccount(nameAccount);
+                        if(nameAccountExit){
+                            JOptionPane.showMessageDialog(null, "Tài khoản đã tồn tại!");
                             return;
                         }
                         boolean success = managerEmployeeServicel.insertAccountAndEmployee(employeeRegis);
@@ -127,13 +150,6 @@ public class ManagerEmployeeController {
             }
         });
     }
-
-    private void loadDataEmployeeToTable() {
-        for (AccountAndEmployeeModel ae : managerEmployeeServicel.getListEmployee()) {
-            panelManagerEmployee.setDataEmployeeTable(ae);
-        }
-    }
-
     public static void main(String[] args) {
         PanelManagerEmployee employeePanel = new PanelManagerEmployee();
         JFrame frame = new JFrame("Test");

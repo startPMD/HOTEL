@@ -24,7 +24,7 @@ public class FormBill extends JFrame {
     //----------------
     JLabel jlbNameCus, jlbAddressCus, jlbNumberPhoneCus, jlbTaxCode, jlbNumberRoom;
     JLabel jlbArrivalDate, jlbDateDepartment, jlbCashier, jlbNumberNight, jlbPay, jlbTotalPrice;
-    JLabel jlb_Underline3,jlb_TotalPrice,jlb_TaxVAT,jlb_SignatureCashier,jlb_SignatureCus,jlbBackground;
+    JLabel jlb_Underline3, jlb_TotalPrice, jlb_TaxVAT, jlb_SignatureCashier, jlb_SignatureCus, jlbBackground;
     JPanel panelServices;
     Font f;
     JButton btnCheckOut, btnCheckOut_Print;
@@ -295,7 +295,7 @@ public class FormBill extends JFrame {
         add(panelServices);
 
 
-            jlb_Underline3 = new JLabel("------------------------------------------------------------------------------------");
+        jlb_Underline3 = new JLabel("------------------------------------------------------------------------------------");
 //        jlb_Underline3.setBounds(253, 343, 576, 25);
         add(jlb_Underline3);
 
@@ -306,27 +306,32 @@ public class FormBill extends JFrame {
         jlbTotalPrice = new JLabel();
         add(jlbTotalPrice);
 
-         jlb_TaxVAT = new JLabel("Đã bao gồm thuế VAT");
+        jlb_TaxVAT = new JLabel("Đã bao gồm thuế VAT");
 //        jlb_TaxVAT.setBounds(51, 368, 200, 25);
         add(jlb_TaxVAT);
 
-         jlb_SignatureCashier = new JLabel("Thu ngân");
+        jlb_SignatureCashier = new JLabel("Thu ngân");
 //        jlb_SignatureCashier.setBounds(107, 395, 80, 25);
         add(jlb_SignatureCashier);
 
-         jlb_SignatureCus = new JLabel("Khách");
+        jlb_SignatureCus = new JLabel("Khách");
 //        jlb_SignatureCus.setBounds(392, 395, 80, 25);
         add(jlb_SignatureCus);
 
+
+        JPanel p = new JPanel(new FlowLayout());
+        p.setBounds(100, this.getHeight()-20,400 , 40);
+        p.setBackground(Color.WHITE);
         btnCheckOut = new JButton("Trả phòng");
         btnCheckOut.setActionCommand("btnCheckOut");
         btnCheckOut.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        add(btnCheckOut);
-
+        p.add(btnCheckOut);
+        p.add(new JLabel("      "));
         btnCheckOut_Print = new JButton("Trả phòng và In");
         btnCheckOut_Print.setActionCommand("btnCheckOut_Print");
         btnCheckOut_Print.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        add(btnCheckOut_Print);
+        p.add(btnCheckOut_Print);
+        add(p);
 
         jlbBackground = new JLabel();
         jlbBackground.setBackground(Color.WHITE);
@@ -375,29 +380,31 @@ public class FormBill extends JFrame {
             setService(service);
         }
     }
-    public void setLocation () {
-        jlb_Underline3.setBounds(253, panelServices.getLocation().y+panelServices.getHeight(), 576, 25);
-        jlb_TotalPrice.setBounds(363,panelServices.getLocation().y+panelServices.getHeight()+25, 100, 25);
-        jlbTotalPrice.setBounds(493, panelServices.getLocation().y+panelServices.getHeight()+25, 100, 25);
-        jlb_TaxVAT.setBounds(51, panelServices.getLocation().y+panelServices.getHeight()+50, 200, 25);
-        jlb_SignatureCashier.setBounds(107, panelServices.getLocation().y+panelServices.getHeight()+80, 80, 25);
-        jlb_SignatureCus.setBounds(392, panelServices.getLocation().y+panelServices.getHeight()+80, 80, 25);
-        btnCheckOut.setBounds(130, panelServices.getLocation().y+panelServices.getHeight()+200, 190, 30);
-        btnCheckOut_Print.setBounds(300, panelServices.getLocation().y+panelServices.getHeight()+200, 150, 30);
-        jlbBackground.setBounds(0, 0, getWidth(), getHeight()+panelServices.getLocation().y);
-        setSize(625,getHeight()+panelServices.getLocation().y-150);
+
+    public void setLocation() {
+        jlb_Underline3.setBounds(253, panelServices.getLocation().y + panelServices.getHeight(), 576, 25);
+        jlb_TotalPrice.setBounds(363, panelServices.getLocation().y + panelServices.getHeight() + 25, 100, 25);
+        jlbTotalPrice.setBounds(493, panelServices.getLocation().y + panelServices.getHeight() + 25, 100, 25);
+        jlb_TaxVAT.setBounds(51, panelServices.getLocation().y + panelServices.getHeight() + 50, 200, 25);
+        jlb_SignatureCashier.setBounds(107, panelServices.getLocation().y + panelServices.getHeight() + 80, 80, 25);
+        jlb_SignatureCus.setBounds(392, panelServices.getLocation().y + panelServices.getHeight() + 80, 80, 25);
+        btnCheckOut.setBounds(130, panelServices.getLocation().y + panelServices.getHeight() + 200, 190, 30);
+        btnCheckOut_Print.setBounds(300, panelServices.getLocation().y + panelServices.getHeight() + 200, 150, 30);
+        jlbBackground.setBounds(0, 0, getWidth(), getHeight() + panelServices.getLocation().y);
+        setSize(625, getHeight() + panelServices.getLocation().y - 150);
     }
+
     public static void main(String[] args) {
 
 
         FormBill d = new FormBill();
-                d.setVisible(true);
-                d.getBtnCheckOut().addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        System.out.println(d.getDateCreateBill());
-                    }
-                });
+        d.setVisible(true);
+        d.getBtnCheckOut().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println(d.getDateCreateBill());
+            }
+        });
     }
 
 

@@ -10,10 +10,9 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -202,10 +201,12 @@ public class PanelManagerPayment extends JPanel {
         panelServicesSelect.add(createSCrollBarPane(selectBillInDateTable), BorderLayout.CENTER);
         return panelServicesSelect;
     }
-
+    public void delAllRowListBill(){
+        selectListBill.setRowCount(0);
+    }
     public void setDataListBill(List<Object[]> objects) {
         // del old data
-        selectListBill.setRowCount(0);
+        delAllRowListBill();
         // add new data
         for (Object[] billCus : objects) {
             selectListBill.addRow(new Object[]{
@@ -265,23 +266,25 @@ public class PanelManagerPayment extends JPanel {
 
         return panelServicesSelect;
     }
-
+    DecimalFormat formatter = new DecimalFormat("#,###");
     public void setDataServiceBill(List<Object[]> objects) {
         // del old data
         selectServiceBill.setRowCount(0);
         // add new data
         for (Object[] service : objects) {
+            Double totalPrice = Double.parseDouble((String) service[5]);
             selectServiceBill.addRow(new Object[]{
-                    service[0], service[1], service[2], service[3], service[4], service[5], service[6],
+                    service[0], service[1], service[2], service[3], service[4], formatter.format(totalPrice)
             });
         }
     }
     public void removeAllCodeBill(){
         codeBills.removeAllItems();
     }
+
     private JPanel createPanelServiceBill() {
 
-        String[] selectColumnNames = {"STT", "Số hóa đơn", "Tên", "Ngày thanh toán", "Số lương", "Ngày thanh toán", "Tổng giá"};
+        String[] selectColumnNames = {"STT", "Số hóa đơn", "Tên", "Ngày thanh toán", "Số lương", "Tổng giá"};
         selectServiceBill = new DefaultTableModel(selectColumnNames, 0) {
             public boolean isCellEditable(int row, int column) {
                 return false;
@@ -313,9 +316,9 @@ public class PanelManagerPayment extends JPanel {
         panelServicesSelect.setLayout(new BorderLayout());
 
         JPanel p = new JPanel(new FlowLayout());
-        JLabel jLabel = new JLabel("Dịch vụ hóa đơn");
+        JLabel jLabel = new JLabel("Số hóa đơn");
         codeBills = new JComboBox<>();
-        btnFindBill = new JButton("Xem hóa đơn");
+        btnFindBill = new JButton("Xem chi tiết dịch vụ");
         datePicker = createDatePicker();
         btnFindBill.setCursor(new Cursor(Cursor.HAND_CURSOR));
         jLabel.setBorder(new EmptyBorder(8, 0, 10, 16));
@@ -339,7 +342,7 @@ public class PanelManagerPayment extends JPanel {
     }
 
     public int getCodeBillFind() {
-        return Integer.parseInt(String.valueOf(codeBills.getSelectedIndex()));
+        return Integer.parseInt(String.valueOf(codeBills.getSelectedItem()));
     }
 
     public static void main(String[] args) {

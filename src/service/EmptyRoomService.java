@@ -12,11 +12,9 @@ import java.util.List;
 import java.util.Map;
 
 public class EmptyRoomService extends ARoomService {
-
     public EmptyRoomService() {
         super();
     }
-
     @Override
     public List<ARoomModel> getRoomList() {
         Map<String, Map<Integer, Integer>> map = getTypeRoom(1);

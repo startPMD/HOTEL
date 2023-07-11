@@ -92,9 +92,6 @@ public class BookedRoomController extends AManagerRoomController {
         }
 
     }
-
-
-
     private void setGuestRoom(int codeRoom) {
         // xoa view phong
         bookedRoomView.removeImgView(codeRoom);

@@ -75,10 +75,6 @@ public class PanelManagerEmployee extends JPanel {
         return editForm;
     }
 
-    public void setChangePasswordForm(ChangePasswordForm changePasswordForm) {
-        this.changePasswordForm = changePasswordForm;
-    }
-
     public void removeRowEmployee(String nameAccount) {
         for (int i = 0; i < employeeTable.getRowCount(); i++) {
             String nameAccountRow = (String) employeeTable.getValueAt(i, 1);
@@ -145,7 +141,9 @@ public class PanelManagerEmployee extends JPanel {
         add(scrollPane, BorderLayout.CENTER);
 
     }
-
+    public void delAllRow(){
+        model.setRowCount(0);
+    }
     public void setDataEmployeeTable(AccountAndEmployeeModel ae) {
         // save list employee
         employeeModels.add(ae.getEmployee());
@@ -195,13 +193,17 @@ public class PanelManagerEmployee extends JPanel {
     public void loadDataEmployeeToEditForm(){
         for (int i = 0; i < model.getRowCount(); i++) {
             boolean hasOption = (boolean) model.getValueAt(i, 8);
+
+            System.err.println(employeeModels.get(i));
             if (hasOption){
+
                 int index = (int) model.getValueAt(i, 0);
                 EmployeeModel employeeModel = employeeModels.get(index-1);
                 editForm.setInfoEmployeeCurrent(employeeModel);
             }
         }
     }
+
     public String getUserName(){
         String name = null;
         for (int i = 0; i < model.getRowCount(); i++) {

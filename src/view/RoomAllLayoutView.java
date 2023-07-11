@@ -115,7 +115,7 @@ public class RoomAllLayoutView extends ARoomView {
     public JPanel createItemRoom(LayoutRoomModel layoutRoomModel) {
         JPanel psub = new JPanel();
         psub.setLayout(new BoxLayout(psub, BoxLayout.Y_AXIS));
-        psub.setBackground(Color.GREEN);
+        psub.setBackground(Color.decode("#0099FF"));
         psub.setBorder(new EmptyBorder(5, 5, 5, 5));
 
         JLabel codeRoom = new JLabel(layoutRoomModel.getNumberRoom() + "");

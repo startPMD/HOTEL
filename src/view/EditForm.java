@@ -109,7 +109,7 @@ public class EditForm extends JFrame {
         add(panel, BorderLayout.CENTER);
         add(saveButton, BorderLayout.SOUTH);
         // Thiết lập kích thước của form và hiển thị lên màn hình
-        eventBtnClose();
+//        eventBtnClose();
     }
 
     public void setInfoEmployeeCurrent(EmployeeModel employeeModel) {
@@ -169,8 +169,8 @@ public class EditForm extends JFrame {
         });
     }
 
-    public void messSaveSuccess(boolean sucess) {
-        if (sucess) {
+    public void messSaveSuccess(boolean success) {
+        if (success) {
             JOptionPane.showMessageDialog(this, "Đã lưu thông tin thành công!");
             dispose();
         } else

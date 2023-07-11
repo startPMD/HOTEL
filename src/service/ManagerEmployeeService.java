@@ -206,10 +206,26 @@ public class ManagerEmployeeService {
             throw new RuntimeException(e);
         }
     }
+
+    public boolean hasNameAccount(String nameAccount) {
+        String query = "SELECT COUNT(username) AS c FROM users \n" +
+                "WHERE username = '"+nameAccount+"'";
+        try (ResultSet rs = this.databaseService.executeQuery(query)) {
+            while (rs.next()){
+                if(rs.getInt("c") == 1)
+                    return  true;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
     public static void main(String[] args) {
-      new ManagerEmployeeService().activeAccount("user","2");
+
+              System.out.println(new ManagerEmployeeService().hasNameAccount("user"));
 
     }
+
 
 
 }

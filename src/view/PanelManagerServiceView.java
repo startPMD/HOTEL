@@ -201,9 +201,6 @@ public class PanelManagerServiceView extends JPanel {
             this.selectComboBox.addItem(String.valueOf(integer));
         }
     }
-    public boolean hasNumberRoom() {
-            return this.selectComboBox.getItemCount()>0;
-    }
     public void setCBDateNumberRoom(Integer integer) {
         this.selectComboBox.addItem(String.valueOf(integer));
     }

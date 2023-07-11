@@ -109,7 +109,7 @@ public class ChangePasswordForm extends JFrame  {
         return new String(confirmPasswordField.getPassword());
     }
 
-    public void showForm(boolean visible) {
+        public void showForm(boolean visible) {
         pack();
         setLocationRelativeTo(null);
         setResizable(false);

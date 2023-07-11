@@ -64,10 +64,6 @@ public class InfoCusBookedFormView extends JFrame {
         return roomChangeForm;
     }
 
-    public String getIdNumber() {
-        return lblIdNumber.getText();
-    }
-
     public String getBookedTime() {
         return lblBookedTime.getText();
     }

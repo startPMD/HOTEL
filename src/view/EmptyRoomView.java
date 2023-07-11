@@ -16,7 +16,7 @@ public class EmptyRoomView extends ARoomView {
 
     @Override
     public ARoomView getObjectRoomView() {
-        return this;
+        return  this;
     }
 
     public void setDataEmptyRoomInformation(RoomBookingFormModel.EmptyRoomInformationModel emptyRoomInformationModel) {

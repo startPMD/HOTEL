@@ -28,6 +28,7 @@ public class MainView extends JFrame {
         ARoomView emptyRoomView = new EmptyRoomView();
         ARoomView guestRoomView = new GuestRoomView();
         ARoomView bookedRoomView = new BookedRoomView();
+
         tabbebPaneRoomView.addTabeb(roomAllLayoutView.getName(), roomAllLayoutView, false);
         tabbebPaneRoomView.addTabeb(emptyRoomView.getName(), emptyRoomView, true);
         tabbebPaneRoomView.addTabeb(guestRoomView.getName(), guestRoomView, true);

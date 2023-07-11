@@ -35,7 +35,12 @@ public class ManagerPaymentController {
             @Override
             public void actionPerformed(ActionEvent e) {
                 List<Object[]> lsCus = paymentService.getBillCusFind(panelManagerPayment.getStrCusFind());
-                panelManagerPayment.setDataListBill( lsCus);
+                if(lsCus.size()<1){
+                    panelManagerPayment.delAllRowListBill();
+                    JOptionPane.showMessageDialog(panelManagerPayment,"Không tìm thấy hóa đơn khách hàng");
+                    return;
+                }
+                panelManagerPayment.setDataListBill(lsCus);
                 panelManagerPayment.removeAllCodeBill();
                 panelManagerPayment.setCodeBills(codeBillToday);
                 panelManagerPayment.setCodeBills(lsCus);
@@ -49,6 +54,7 @@ public class ManagerPaymentController {
             public void actionPerformed(ActionEvent e) {
 //                String dateFind = panelManagerPayment.getDateFind();
                 int codeBillFind = panelManagerPayment.getCodeBillFind();
+                System.out.println(codeBillFind);
                 List<Object[]> lsCus = paymentService.getBillServices(codeBillFind);
                 panelManagerPayment.setDataServiceBill(lsCus);
             }
